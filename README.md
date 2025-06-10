@@ -179,6 +179,32 @@ Eisodos::$dbConnectors->db()->commit();
 print("Result array\n");
 print_r($resultArray);
 ```
+#### Result (CLOB has been cut)
+```
+**** Binding parameters for Stored Procedure
+Executing stored procedure DML
+Result array
+Array
+(
+    [P_ID] => 22
+    [P_C_INT] => 456
+    [P_C_FLOAT] => 789.45
+    [P_C_DATE] => 2025-06-09
+    [P_C_DATETIME] => 2025-06-09 10:05:12
+    [P_C_CLOB] => vcQMDyBVXACttOnYKrLOeJGQ...
+    [P_C_VARCHAR] => test1_sp
+    [P_C_CHAR] => Y
+    [P_CALLBACK] => out callback
+    [P_OUT_INT] => 457
+    [P_OUT_VARCHAR2] => out test1_sp
+    [P_OUT_DATE] => 2025-06-10
+    [P_OUT_DATETIME] => 2025-06-10 10:05:12
+    [P_OUT_CLOB] => out vcQMDyBVXACttOnYKrLOeJGQ...
+    [P_ERROR_MSG] => 
+    [P_ERROR_CODE] => 0
+    [P_LOGS] => 
+)
+```
 
 #### Stored procedure for testing
 ```
