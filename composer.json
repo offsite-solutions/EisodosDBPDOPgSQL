@@ -1,0 +1,43 @@
+{
+  "name": "offsite-solutions/eisodos-db-connector-pdo-pgsql",
+  "description": "Eisodos DB Connector - PDO PostgreSQL",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Offsite Solutions Ltd.",
+      "email": "info@offsite-solutions.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+        "type": "path",
+        "url": "../../Base",
+        "options": {
+            "symlink": true
+        }
+    },
+    {
+        "type": "path",
+        "url": "../../DBConnector",
+        "options": {
+            "symlink": true
+        }
+    }
+  ],
+  "require": {
+    "php": ">=8.3.0",
+    "ext-pdo": "*",
+    "ext-pdo_pgsql": "*",
+    "offsite-solutions/eisodos": "@dev"
+  },
+  "require-dev": {
+  },
+  "suggest": {
+  },
+  "autoload": {
+    "psr-0": {
+      "Eisodos\\": "src/"
+    }
+  }
+}
