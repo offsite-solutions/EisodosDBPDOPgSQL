@@ -207,7 +207,7 @@ Array
 ```
 
 #### Stored procedure for testing
-```postgresql
+```pgsql
 CREATE TABLE EISODOS_TEST1 (
     ID         BIGINT NOT NULL,
     C_INT      INT4,
