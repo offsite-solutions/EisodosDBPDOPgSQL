@@ -16,7 +16,7 @@ composer install "offsite-solutions/eisodos-db-connector-pdo-pgsql"
 
 ## Configuration
 
-```
+```ini
 [Database]
 driver=pgsql
 user=eisodos
@@ -96,7 +96,7 @@ Example: **--application_name=PDO_PgSQL_test**
 Series of SQLs which will be executed right after successful connection.
 
 ## Initialization
-```
+```php
   use Eisodos\Connectors\ConnectorPDOPgSQL;
   use Eisodos\Eisodos;
   
@@ -111,20 +111,20 @@ See Eisodos DBConnector Interface documentation: https://github.com/offsite-solu
 
 ## Examples
 ### Get all rows of a query
-```
+```php
 Eisodos::$dbConnectors->db()->query(RT_ALL_ROWS, "select * from eisodos_test1 order by id desc", $back);
 print_r($back);
 print("   Number of rows returned: " . Eisodos::$dbConnectors->db()->getLastQueryTotalRows() . "\n");
 ```
 
 ### Execute DML
-```
+```php
 Eisodos::$dbConnectors->db()->executeDML("delete from eisodos_test1 where id>=1000");
 Eisodos::$dbConnectors->db()->commit();
 ```
 
 ### Execute prepared DML
-```
+```php
 function generateCLOB($count_): string {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   $randomString = '';
@@ -153,7 +153,7 @@ Eisodos::$dbConnectors->db()->commit();
 ```
 
 ### Execute Stored Procedure with IN, IN_OUT, OUT parameters
-```
+```php
 $boundVariables = [];
 Eisodos::$dbConnectors->db()->bind($boundVariables, 'P_ID', 'integer', '', 'IN_OUT');
 Eisodos::$dbConnectors->db()->bind($boundVariables, 'P_C_INT', 'integer', 456);
@@ -207,7 +207,7 @@ Array
 ```
 
 #### Stored procedure for testing
-```
+```postgresql
 CREATE TABLE EISODOS_TEST1 (
     ID         BIGINT NOT NULL,
     C_INT      INT4,
