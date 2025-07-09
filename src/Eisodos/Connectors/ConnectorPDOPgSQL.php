@@ -324,7 +324,7 @@
       if (!isset($this->connection)) {
         throw new RuntimeException("Database not connected");
       }
-      $this->connection->beginTransaction($savePoint_);
+      $this->connection->beginTransaction();
     }
     
     /** @inheritDoc */
@@ -332,7 +332,9 @@
       if (!isset($this->connection)) {
         throw new RuntimeException("Database not connected");
       }
-      if ($this->connection->inTransaction()) $this->connection->commit();
+      if ($this->connection->inTransaction()) {
+        $this->connection->commit();
+      }
     }
     
     /** @inheritDoc */
@@ -340,7 +342,7 @@
       if (!isset($this->connection)) {
         throw new RuntimeException("Database not connected");
       }
-      $this->connection->rollback($savePoint_);
+      $this->connection->rollback();
     }
     
     /** @inheritDoc */
