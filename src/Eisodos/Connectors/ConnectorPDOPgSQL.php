@@ -36,16 +36,16 @@
     private PDO $connection;
     
     /** @var array */
-    private $lastQueryColumnNames = [];
+    private array $lastQueryColumnNames = [];
     
     /** @var int */
-    private $lastQueryTotalRows = 0;
+    private int $lastQueryTotalRows = 0;
     
     /** @var string */
-    private $named_notation_separator = '=>';
+    private string $named_notation_separator = '=>';
     
     public function connected(): bool {
-      return (isset($this->connection) && !($this->connection === NULL));
+      return (isset($this->connection));
     }
     
     public function __destruct() {
@@ -57,6 +57,7 @@
      *
      * @inheritDoc
      * throws RuntimeException
+     * @throws \Exception
      */
     public function connect($databaseConfigSection_ = 'Database', $connectParameters_ = [], $persistent_ = false): void {
       if (!isset($this->connection)) {
@@ -177,7 +178,7 @@
       }
     }
     
-    private function _getColumnNames($resultSet) {
+    private function _getColumnNames($resultSet): void {
       for ($i = 0; $i < $resultSet->columnCount(); $i++) {
         $this->lastQueryColumnNames[] = $resultSet->getColumnMeta($i)['name'];
       }
@@ -188,7 +189,7 @@
      * */
     public function query(
       int $resultTransformation_, string $SQL_, &$queryResult_ = NULL, $getOptions_ = [], $exceptionMessage_ = ''
-    ) {
+    ): mixed {
       
       $this->lastQueryColumnNames = [];
       $this->lastQueryTotalRows = 0;
@@ -311,16 +312,11 @@
     
     /** @inheritDoc */
     public function disconnect($force_ = false): void {
-      if ($this->connected()) {
-        if ($this->inTransaction()) {
-          $this->connection->rollback();
-        }
-        Eisodos::$logger->trace('Database disconnected');
-      }
+      /* free up the object to close connection */
     }
     
     /** @inheritDoc */
-    public function startTransaction($savePoint_ = NULL): void {
+    public function startTransaction(string $savePoint_ = NULL): void {
       if (!isset($this->connection)) {
         throw new RuntimeException("Database not connected");
       }
@@ -412,7 +408,7 @@
         throw new RuntimeException("Database not connected");
       }
       
-      if (count($dataTypes_) != count($data_)) {
+      if (count($dataTypes_) !== count($data_)) {
         $_POST["__EISODOS_extendedError"] = 'executePreparedDML missing data type or data';
         throw new RuntimeException('executePreparedDML missing data type or data');
       }
@@ -477,7 +473,7 @@
     }
     
     /** @inheritDoc */
-    public function bind(array &$boundVariables_, string $variableName_, string $dataType_, string $value_, $inOut_ = 'IN') {
+    public function bind(array &$boundVariables_, string $variableName_, string $dataType_, string $value_, $inOut_ = 'IN'): void {
       $boundVariables_[$variableName_] = array();
       if ($dataType_ === "clob" && $value_ === '') // Empty CLOB bug / invalid LOB locator specified, force type to text
       {
@@ -490,7 +486,7 @@
     }
     
     /** @inheritDoc */
-    public function bindParam(array &$boundVariables_, string $parameterName_, string $dataType_) {
+    public function bindParam(array &$boundVariables_, string $parameterName_, string $dataType_): void {
       $this->bind($boundVariables_, $parameterName_, $dataType_, Eisodos::$parameterHandler->getParam($parameterName_));
     }
     
@@ -586,7 +582,7 @@
     /**
      * @inheritDoc
      */
-    public function getConnection() {
+    public function getConnection(): mixed {
       return $this->connection;
     }
     
