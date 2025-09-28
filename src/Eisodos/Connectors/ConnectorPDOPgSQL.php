@@ -499,19 +499,13 @@
       $driver = $this->connection->getAttribute(PDO::ATTR_DRIVER_NAME);
       
       $sql = "";
-      if ($driver === 'oci8') {
-        foreach ($inputVariables_ as $parameterName => $parameterProperties) {
-          $sql .= ($sql ? "," : "") . $parameterName . " => :" . $parameterName;
+      
+      foreach ($inputVariables_ as $parameterName => $parameterProperties) {
+        if ($parameterProperties["mode_"] !== "OUT") {
+          $sql .= ($sql ? "," : "") . $parameterName . " " . $this->named_notation_separator . " :" . $parameterName;
         }
-        $sql = "begin " . $procedureName_ . "(" . $sql . "); end; ";
-      } else if ($driver === 'pgsql') {
-        foreach ($inputVariables_ as $parameterName => $parameterProperties) {
-          if ($parameterProperties["mode_"] !== "OUT") {
-            $sql .= ($sql ? "," : "") . $parameterName . " " . $this->named_notation_separator . " :" . $parameterName;
-          }
-        }
-        $sql = "select * from " . $procedureName_ . "(" . $sql . ")";
       }
+      $sql = "select * from " . $procedureName_ . "(" . $sql . ")";
       
       try {
         $resultSet = $this->connection->prepare($sql);
@@ -545,14 +539,6 @@
           $resultSet->bindParam($paramName,
             $resultVariables_[$paramName],
             $type
-          );
-        } else if ($driver === 'oci8') { // out parameters must set length in oci8
-          $resultSet->bindParam($paramName,
-            $resultVariables_[$paramName],
-            $type,
-            (($parameterProperties["type"] === "integer" ||
-              $parameterProperties["type"] === "int" ||
-              $parameterProperties["type"] === "text") ? (32766 / 2) : -1)
           );
         }
       }
