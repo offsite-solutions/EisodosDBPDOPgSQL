@@ -319,7 +319,7 @@
     }
     
     /** @inheritDoc */
-    public function startTransaction(string $savePoint_ = NULL): void {
+    public function startTransaction(string|null $savePoint_ = NULL): void {
       if (!isset($this->connection)) {
         throw new RuntimeException("Database not connected");
       }
@@ -337,7 +337,7 @@
     }
     
     /** @inheritDoc */
-    public function rollback($savePoint_ = NULL): void {
+    public function rollback(string|null $savePoint_ = NULL): void {
       if (!isset($this->connection)) {
         throw new RuntimeException("Database not connected");
       }
