@@ -31,6 +31,9 @@
    * connectSQL=list of query run after connection separated by ;
    */
   class ConnectorPDOPgSQL implements DBConnectorInterface {
+  
+    /** @var string DB Syntax */
+    private string $_dbSyntax='pgsql';
     
     /** @var PDO null */
     private PDO $connection;
@@ -628,6 +631,13 @@
      */
     public function defaultStrParam(string $parameterName_, $isString_ = true, $maxLength_ = 0, $exception_ = '', $withComma_ = false): string {
       return $this->emptySQLField(Eisodos::$parameterHandler->getParam($parameterName_), $isString_, $maxLength_, $exception_, $withComma_, 'DEFAULT');
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function DBSyntax(): string {
+      return $this->_dbSyntax;
     }
     
   }
