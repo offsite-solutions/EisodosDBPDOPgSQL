@@ -67,7 +67,7 @@
         $databaseConfig = array_change_key_case(Eisodos::$configLoader->importConfigSection($databaseConfigSection_, '', false));
         
         $connectString = Eisodos::$utils->safe_array_value($databaseConfig, 'driver', 'pgsql') .
-          (strpos(Eisodos::$utils->safe_array_value($databaseConfig, 'driver', 'pgsql'), ':') === false ? ':' : '');
+          (!str_contains(Eisodos::$utils->safe_array_value($databaseConfig, 'driver', 'pgsql'), ':') ? ':' : '');
         $connectParameters = [
           PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
