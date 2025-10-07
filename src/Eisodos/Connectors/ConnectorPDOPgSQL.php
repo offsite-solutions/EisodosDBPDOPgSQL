@@ -640,4 +640,20 @@
       return $this->_dbSyntax;
     }
     
+    /**
+     * @inheritDoc
+     */
+    public function toList(mixed $value_, bool $isString_ = true, int $maxLength_ = 0, string $exception_ = '', bool $withComma_ = false): string {
+      $result = '';
+      foreach (explode(',', $value_) as $value) {
+        $result .= ($result === '' ? '' : ',') . $this->nullStr(trim($value), $isString_, $maxLength_, $exception_);
+      }
+      $result = '(' . $result . ')';
+      if ($withComma_) {
+        $result .= ", ";
+      }
+      
+      return $result;
+    }
+    
   }

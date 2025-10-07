@@ -8,28 +8,12 @@
       "email": "info@offsite-solutions.com"
     }
   ],
-  "minimum-stability": "dev",
-  "repositories": [
-    {
-        "type": "path",
-        "url": "../../Base",
-        "options": {
-            "symlink": true
-        }
-    },
-    {
-        "type": "path",
-        "url": "../../DBConnector",
-        "options": {
-            "symlink": true
-        }
-    }
-  ],
+  "minimum-stability": "stable",
   "require": {
     "php": ">=8.4.0",
     "ext-pdo": "*",
     "ext-pdo_pgsql": "*",
-    "offsite-solutions/eisodos": "@dev"
+    "offsite-solutions/eisodos": "^1.1.6"
   },
   "require-dev": {
   },
