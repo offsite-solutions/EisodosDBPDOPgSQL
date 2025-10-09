@@ -31,9 +31,9 @@
    * connectSQL=list of query run after connection separated by ;
    */
   class ConnectorPDOPgSQL implements DBConnectorInterface {
-  
+    
     /** @var string DB Syntax */
-    private string $_dbSyntax='pgsql';
+    private string $_dbSyntax = 'pgsql';
     
     /** @var PDO null */
     private PDO $connection;
@@ -174,7 +174,7 @@
         
         foreach (explode(';', $connectSQL) as $sql) {
           if ($sql !== '') {
-            $this->query(RT_FIRST_ROW_FIRST_COLUMN, $sql);
+            $this->query(RT_NO_ROWS, $sql);
           }
         }
         
@@ -216,6 +216,15 @@
       }
       
       $resultSet->execute([]);
+      
+      if ($resultTransformation_ === RT_NO_ROWS) {
+        
+        $resultSet->closeCursor();
+        $this->lastQueryTotalRows = 0;
+        
+        return true;
+      }
+      
       $this->_getColumnNames($resultSet);
       
       if ($resultTransformation_ === RT_RAW) {
