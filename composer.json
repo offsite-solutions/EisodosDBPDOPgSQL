@@ -8,12 +8,12 @@
       "email": "info@offsite-solutions.com"
     }
   ],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
     "php": ">=8.4.0",
     "ext-pdo": "*",
     "ext-pdo_pgsql": "*",
-    "offsite-solutions/eisodos": "^1.1.6"
+    "offsite-solutions/eisodos": "@dev"
   },
   "require-dev": {
   },
