@@ -13,6 +13,7 @@
     "php": ">=8.4.0",
     "ext-pdo": "*",
     "ext-pdo_pgsql": "*",
+    "ext-mbstring": "*",
     "offsite-solutions/eisodos": "@dev"
   },
   "require-dev": {
