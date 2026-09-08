@@ -2,9 +2,10 @@
 Eisodos FW PDO:PostgreSQL Database Connector
 
 ## Prerequisites
-- PHP 8.4
-  - Tested with PHP 8.4
+- PHP 8.4+
+  - Tested with PHP 8.5
 - Installed ext-pdo, ext-pdo_pgsql
+  - Tested with PostgreSQL (libpq) 18.6
 - Eisodos framework
   - Minimum version 1.1.0
 
