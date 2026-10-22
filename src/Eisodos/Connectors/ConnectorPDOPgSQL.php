@@ -438,8 +438,8 @@
       
       $countData = count($data_);
       for ($i = 0; $i < $countData; $i++) {
-        $this->_convertType($dataTypes_[$i], $data_[$i]);
-        $resultSet->bindParam($i + 1, $data_[$i], $dataTypes_[$i]);
+        $type = $this->_convertType($dataTypes_[$i], $data_[$i]);
+        $resultSet->bindParam($i + 1, $data_[$i], $type);
       }
       
       $resultSet->execute();
