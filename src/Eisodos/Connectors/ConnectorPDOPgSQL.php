@@ -128,11 +128,11 @@
         }
         
         // options
-        if (Eisodos::$utils->safe_array_value($databaseConfig, 'connectTimeout') !== '') {
-          $connectParameters[PDO::ATTR_TIMEOUT] = (int)Eisodos::$utils->safe_array_value($databaseConfig, 'connectTimeout');
+        if (Eisodos::$utils->safe_array_value($databaseConfig, 'connecttimeout') !== '') {
+          $connectParameters[PDO::ATTR_TIMEOUT] = (int)Eisodos::$utils->safe_array_value($databaseConfig, 'connecttimeout');
         }
-        if (Eisodos::$utils->safe_array_value($databaseConfig, 'prefetchSize') !== '') {
-          $connectParameters[PDO::ATTR_PREFETCH] = (int)Eisodos::$utils->safe_array_value($databaseConfig, 'prefetchSize');
+        if (Eisodos::$utils->safe_array_value($databaseConfig, 'prefetchsize') !== '') {
+          $connectParameters[PDO::ATTR_PREFETCH] = (int)Eisodos::$utils->safe_array_value($databaseConfig, 'prefetchsize');
         }
         if (Eisodos::$utils->safe_array_value($databaseConfig, 'case') !== '') {
           switch (Eisodos::$utils->safe_array_value($databaseConfig, 'case')) {
@@ -147,14 +147,14 @@
               break;
           }
         }
-        if (Eisodos::$utils->safe_array_value($databaseConfig, 'stringifyFetches') !== '') {
-          $connectParameters[PDO::ATTR_STRINGIFY_FETCHES] = (Eisodos::$utils->safe_array_value($databaseConfig, 'stringifyFetches') === 'true');
+        if (Eisodos::$utils->safe_array_value($databaseConfig, 'stringifyfetches') !== '') {
+          $connectParameters[PDO::ATTR_STRINGIFY_FETCHES] = (Eisodos::$utils->safe_array_value($databaseConfig, 'stringifyfetches') === 'true');
         }
         if (Eisodos::$utils->safe_array_value($databaseConfig, 'persistent') !== '') {
           $connectParameters[PDO::ATTR_PERSISTENT] = (Eisodos::$utils->safe_array_value($databaseConfig, 'persistent') === 'true');
         }
-        if (Eisodos::$utils->safe_array_value($databaseConfig, 'autoCommit') !== '') {
-          $connectParameters[PDO::ATTR_AUTOCOMMIT] = (Eisodos::$utils->safe_array_value($databaseConfig, 'autoCommit') === 'true');
+        if (Eisodos::$utils->safe_array_value($databaseConfig, 'autocommit') !== '') {
+          $connectParameters[PDO::ATTR_AUTOCOMMIT] = (Eisodos::$utils->safe_array_value($databaseConfig, 'autocommit') === 'true');
         }
         
         try {
