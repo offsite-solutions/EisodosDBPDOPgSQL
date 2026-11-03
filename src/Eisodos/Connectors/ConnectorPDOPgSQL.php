@@ -25,7 +25,6 @@
    * prefetchSize=
    * case=natural(default)|lower|upper
    * stringifyFetches=true|false(default)
-   * autoCommit=true|false(default)
    * persistent=true|false(default)
    * options= list of available options: https://www.postgresql.org/docs/current/libpq-connect.html#libpq-connstring
    * connectSQL=list of query run after connection separated by ;
@@ -90,7 +89,6 @@
          * PDO::ATTR_STRINGIFY_FETCHES - Forces all fetched values (except null) to be treated as strings.
          *                               null values remain unchanged unless PDO::ATTR_ORACLE_NULLS is set to PDO::NULL_TO_STRING.
          * PDO::ATTR_MAX_COLUMN_LEN - Sets the maximum column name length.
-         * PDO::ATTR_AUTOCOMMIT - If this value is false, PDO attempts to disable autocommit so that the connection begins a transaction.
          */
         
         if (Eisodos::$utils->safe_array_value($databaseConfig, 'user') !== '') {
@@ -152,9 +150,6 @@
         }
         if (Eisodos::$utils->safe_array_value($databaseConfig, 'persistent') !== '') {
           $connectParameters[PDO::ATTR_PERSISTENT] = (Eisodos::$utils->safe_array_value($databaseConfig, 'persistent') === 'true');
-        }
-        if (Eisodos::$utils->safe_array_value($databaseConfig, 'autocommit') !== '') {
-          $connectParameters[PDO::ATTR_AUTOCOMMIT] = (Eisodos::$utils->safe_array_value($databaseConfig, 'autocommit') === 'true');
         }
         
         try {

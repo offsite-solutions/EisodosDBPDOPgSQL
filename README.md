@@ -33,7 +33,6 @@ connectTimeout=10
 # disable, allow, prefer, require
 sslmode=disable
 options=--application_name=PDO_PgSQL_test
-autoCommit=false
 connectSQL=set client_encoding to 'UTF-8';set timezone to 'Europe/Budapest';
 ```
 
@@ -86,7 +85,7 @@ Force case of database objects' name. Available values are **natural(default), l
 Stringify fetches, values are **true, false(default)**
 
 ### autoCommit
-Set auto commit, values are **true, false(default)**
+Removed. pdo_pgsql does not support `PDO::ATTR_AUTOCOMMIT` and silently ignores it, so the connection always autocommits. Delete the `autoCommit` line from existing configurations; use `startTransaction()` / `commit()` / `rollback()` for transactions.
 
 ### Options
 List of available options: https://www.postgresql.org/docs/current/libpq-connect.html#libpq-connstring
